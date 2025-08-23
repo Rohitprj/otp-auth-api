@@ -1,7 +1,8 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const authRoutes = require("./routes/auth");
+import dotenv from "dotenv";
+dotenv.config();
+import express from "express";
+import mongoose from "mongoose";
+import authRoutes from "./routes/auth.js";
 
 const app = express();
 const PORT = process.env.PORT || 3001;

@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const User = require('../models/User');
-const { sendOTP, verifyOTP } = require('../utils/otp');
-const jwt = require('jsonwebtoken');
+import User from '../models/User.js';
+import { sendOTP, verifyOTP } from '../utils/otp.js';
+import jwt from 'jsonwebtoken';
 
 // Store OTPs temporarily (in a real app, use Redis or a database)
 const otpStorage = new Map(); // email -> { otp: string, expiresAt: Date }
@@ -88,4 +88,4 @@ router.post('/verify-otp', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

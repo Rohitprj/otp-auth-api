@@ -1,5 +1,5 @@
-const nodemailer = require("nodemailer");
-const otpGenerator = require("otp-generator");
+import nodemailer from "nodemailer";
+import otpGenerator from "otp-generator";
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST, // Use `host` instead of `service`
@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const sendOTP = (email) => {
+export const sendOTP = (email) => {
   const otp = otpGenerator.generate(6, {
     upperCaseAlphabets: false,
     specialChars: false,
@@ -39,7 +39,7 @@ const sendOTP = (email) => {
 
 // This function is not strictly needed as verification happens in auth.js,
 // but keeping it for conceptual completeness if a separate verification utility was desired.
-const verifyOTP = (storedOtp, providedOtp, expiresAt) => {
+export const verifyOTP = (storedOtp, providedOtp, expiresAt) => {
   if (!storedOtp || storedOtp !== providedOtp) {
     return { success: false, message: "Invalid OTP" };
   }
@@ -48,5 +48,3 @@ const verifyOTP = (storedOtp, providedOtp, expiresAt) => {
   }
   return { success: true, message: "OTP verified successfully" };
 };
-
-module.exports = { sendOTP, verifyOTP };
